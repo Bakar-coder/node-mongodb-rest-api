@@ -4,11 +4,11 @@ const express = require("express"),
   config = require("config"),
   mongoose = require("mongoose"),
   cors = require("cors"),
-    compression = require('compression'),
+  compression = require("compression"),
   db = require("./utils/db").mongoURI,
   fs = require("fs"),
   fileUpload = require("express-fileupload"),
-    helmet = require('helmet'),
+  helmet = require("helmet"),
   morgan = require("morgan"),
   path = require("path"),
   port = process.env.PORT || 5000,
@@ -26,10 +26,9 @@ const users = require("./routes/users"),
   products = require("./routes/products");
 
 // create log file
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+const logStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a"
+});
 
 // initialize app middleware
 app.use(express.json());
@@ -39,7 +38,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(fileUpload());
 app.use(helmet());
 app.use(compression());
-app.use(morgan("combined", { stream: accessLogStream }));
+app.use(morgan("combined", { stream: logStream }));
 app.use(cors());
 app.use("/api/users", users);
 app.use("/api/admin", addProduct);
