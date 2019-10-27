@@ -7,7 +7,7 @@ const express = require("express"),
     compression = require('compression'),
   db = require("./utils/db").mongoURI,
   fs = require("fs"),
-  fileupload = require("express-fileupload"),
+  fileUpload = require("express-fileupload"),
     helmet = require('helmet'),
   morgan = require("morgan"),
   path = require("path"),
@@ -31,12 +31,12 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" }
 );
 
-// initialize app middlewares
+// initialize app middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "client")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(fileupload());
+app.use(fileUpload());
 app.use(helmet());
 app.use(compression());
 app.use(morgan("combined", { stream: accessLogStream }));
