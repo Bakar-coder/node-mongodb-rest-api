@@ -6,7 +6,7 @@ const mongoose = require("mongoose"),
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    image:  String
+    image:  {type:String, required: true }
   });
 
 const validateProduct = product => {
@@ -14,7 +14,7 @@ const validateProduct = product => {
     title: Joi.string().required(),
     description: Joi.string().required(),
     price: Joi.number().required(),
-    image: Joi.string()
+    image: Joi.file().required()
   };
 
   return Joi.validate(product, schema);

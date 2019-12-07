@@ -43,5 +43,5 @@ exports.loginUser = async (req, res) => {
   return res
     .header("x-auth-token", token)
     .header("access-control-expose-headers", "x-auth-token")
-    .json({ success: true, msg: "login successful." });
+    .json({ success: true, msg: "login successful.", token });
 };
